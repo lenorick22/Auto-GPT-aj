@@ -1,33 +1,30 @@
-# Credit repair playbook outline (for CreditFix-GPT)
+# CreditFix master playbook
 
-The agent should expand this into `auto_gpt_workspace/credit_repair_playbook.md`.
+Expand into `auto_gpt_workspace/creditfix/` during a run. Prefer official sources.
 
-## 1. Pull your reports
-- Get free reports from AnnualCreditReport.com (all three bureaus).
-- Save PDFs; never share full SSN in chat logs if avoidable.
+## Score levers (typical FICO-style emphasis)
+1. **Payment history** — never miss due dates; autopay at least the minimum  
+2. **Utilization** — under 30%; many target under 10% before statement close  
+3. **Age of history** — don’t casually close oldest cards  
+4. **Mix** — long-term; don’t open junk accounts just for “mix”  
+5. **New credit** — minimize unnecessary hard inquiries  
 
-## 2. Inventory every line item
-- Accounts, balances, payment status, dates opened/closed
-- Hard inquiries and public records
-- Mark: accurate / inaccurate / unsure / not mine
+## Error vs accurate negative
+| Situation | Move |
+| --- | --- |
+| Not your account / mixed file | Bureau + furnisher dispute; freeze if theft |
+| Wrong balance/status/dates | Dispute with evidence |
+| Duplicate collection | Dispute duplicates |
+| Accurate late payment | Goodwill after sustained on-time; else wait for aging |
+| Unfamiliar collection | Debt validation |
 
-## 3. Fix errors the legal way
-- Dispute inaccurate items with the bureau and the furnisher
-- Use templates in `agents/credit_repair/templates/`
-- Keep copies and dates of everything sent
+## Evidence standards
+- Government ID + proof of address  
+- Statements showing correct balance/status  
+- FTC IdentityTheft.gov affidavit / police report for theft  
+- Mail copies only — never originals  
 
-## 4. Improve the score fundamentals
-- On-time payments (largest factor)
-- Keep credit card utilization under ~30% (lower is better)
-- Avoid unnecessary new hard inquiries
-- Do not close old accounts solely for "optimization" without understanding average age of accounts
-
-## 5. Identity theft (if applicable)
-- Place fraud alerts or freezes
-- File FTC IdentityTheft.gov report and police report when needed
-- Follow official recovery steps only
-
-## 6. What this agent will not do
-- Fake identities, synthetic IDs, or fabricated employment/address history
-- "Credit washing" or advising you to dispute accurate debts as a delay tactic
-- Guaranteeing a specific score increase
+## Cadence
+- Weekly: utilization check + payment calendar  
+- ~30 days: dispute follow-ups  
+- 90 days: full re-inventory + refresh `NEXT_ACTIONS.md`

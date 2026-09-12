@@ -1,0 +1,4 @@
+bureau,item_type,creditor,account_mask,date_opened,date_reported,status,balance,credit_limit,past_due,payment_history_notes,classification,priority,recommended_action,evidence_needed
+Equifax,revolving,Example Bank,*1234,2019-01-15,2026-01-01,Open/Current,450,3000,0,OK,keep,P3,pay_to_under_10pct_before_statement,statements
+Experian,collection,Example CA,*9999,2022-06-01,2025-12-15,Open Collection,800,,800,unknown if mine,investigate,P1,send_debt_validation,collector_letter_envelope
+TransUnion,inquiry,Auto Lender,n/a,2025-11-01,2025-11-01,Hard inquiry,0,,0,may be unrecognized,investigate,P2,confirm_if_authorized,preapproval_email

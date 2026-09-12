@@ -1,20 +1,24 @@
 # Auto-GPT-aj
 
-Autonomous GPT agent fork with ready-to-run presets.
+Autonomous GPT agent fork with a production-ready **CreditFix-GPT** preset.
 
-> Upstream Chinese docs redirect: https://github.com/kaqijiang/Auto-GPT-ZH
+> Upstream Chinese docs: https://github.com/kaqijiang/Auto-GPT-ZH
 
-## CreditFix-GPT — fix your credit (legally)
+## CreditFix-GPT — rebuild credit the legal way
 
-This repo includes a preset agent that helps you improve credit through **lawful** steps: pull reports, find errors, draft FCRA-style dispute and goodwill letters, and build a payment/utilization plan.
+Not a vague chatbot prompt — a full operating kit:
+
+- 5-phase agent goals + hard compliance constraints (English output, no invented IDs)
+- Seed workspace: inventory CSV, dispute log, 30/60/90 plan, bureau contacts
+- Letter pack: bureau dispute, furnisher dispute, goodwill, debt validation
+- `credit_math.py` for utilization targets and snowball/avalanche previews
 
 ```bash
-cp .env.template .env   # add your OPENAI_API_KEY
+cp .env.template .env   # add OPENAI_API_KEY
 pip install -r requirements.txt
-python -m autogpt -C agents/credit_repair.yaml
-# or: ./scripts/run_credit_repair.sh
+./scripts/run_credit_repair.sh
 ```
 
-Details and letter templates: [`agents/README.md`](agents/README.md).
+Docs: [`agents/README.md`](agents/README.md)
 
-**Important:** CreditFix-GPT is educational automation, not a licensed credit counselor or attorney. It will not help with fraud, fake identities, or disputing accurate debts in bad faith.
+**Disclaimer:** Educational automation only — not a licensed credit counselor or attorney. Accurate negatives may remain until they age off. No fraud, fake identities, or bad-faith disputes.

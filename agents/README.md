@@ -2,30 +2,47 @@
 
 ## CreditFix-GPT (legal credit improvement)
 
-Helps you research consumer rights, spot report errors, draft dispute/goodwill letters, and build a payment/utilization plan. It is **not** a lawyer or guaranteed credit-repair service, and it refuses illegal tactics.
+A full credit-rebuild kit: rights research, report inventory, dispute/goodwill/validation letters, utilization & payoff math, and a 30/60/90 plan.
 
-### Run
+It is **not** a lawyer or guaranteed repair service. It refuses fraud and bad-faith disputes of accurate debts.
 
-1. Copy `.env.template` to `.env` and set a valid `OPENAI_API_KEY`.
-2. Install deps: `pip install -r requirements.txt`
-3. Start the agent:
+### Quick start
+
+```bash
+cp .env.template .env   # set OPENAI_API_KEY
+pip install -r requirements.txt
+./scripts/run_credit_repair.sh
+```
+
+Or without bootstrap:
 
 ```bash
 python -m autogpt -C agents/credit_repair.yaml
 ```
 
-Or:
+### What you get
+
+| Path | Purpose |
+| --- | --- |
+| `agents/credit_repair.yaml` | Agent brain (goals, constraints, operating rules) |
+| `agents/credit_repair/seed/` | Files copied into the workspace on first run |
+| `agents/credit_repair/templates/` | Bureau/furnisher dispute, goodwill, validation letters |
+| `agents/credit_repair/tools/credit_math.py` | Utilization, target paydown, payoff, snowball/avalanche |
+
+Runtime outputs land in `auto_gpt_workspace/creditfix/` (gitignored).
+
+### Math tool examples
 
 ```bash
-./scripts/run_credit_repair.sh
+python agents/credit_repair/tools/credit_math.py utilization --cards 'visa:900:3000,amex:400:1000'
+python agents/credit_repair/tools/credit_math.py target --balance 1200 --limit 4000 --target-pct 10
+python agents/credit_repair/tools/credit_math.py payoff --balance 2500 --apr 22.9 --payment 200
+python agents/credit_repair/tools/credit_math.py snowball --debts 'a:900:19,b:400:24' --budget 300 --method avalanche
 ```
 
-### What it creates
+### Recommended first session
 
-Under `auto_gpt_workspace/` (gitignored runtime folder), the agent should produce:
-
-- `credit_repair_playbook.md` — step-by-step plan
-- Dispute / goodwill letter drafts personalized from your notes
-- A simple progress tracker
-
-Starter templates live in `agents/credit_repair/templates/`.
+1. Fill `QUESTIONS_FOR_USER.md` (seeded into the workspace).
+2. Pull all three reports from AnnualCreditReport.com.
+3. Let the agent classify tradelines and draft only **error-based** disputes.
+4. Run `credit_math.py` to plan utilization and payoff.

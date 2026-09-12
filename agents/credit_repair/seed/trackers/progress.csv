@@ -1,0 +1,2 @@
+date,score_source,score,revolving_balance,revolving_limit,utilization_pct,on_time_streak_months,open_disputes,resolved_disputes,hard_inquiries_12mo,notes
+2026-01-01,MyFICO/other,[SCORE],1300,4000,32.5,1,1,0,2,baseline — replace placeholders
