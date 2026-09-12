@@ -6,6 +6,16 @@ A full credit-rebuild kit: rights research, report inventory, dispute/goodwill/v
 
 It is **not** a lawyer or guaranteed repair service. It refuses fraud and bad-faith disputes of accurate debts.
 
+### Train the agent (knowledge corpus)
+
+```bash
+./scripts/train_credit_repair.sh
+# optional memory embeddings (needs OPENAI_API_KEY):
+INGEST_MEMORY=1 ./scripts/train_credit_repair.sh
+```
+
+This installs 15+ credit-repair modules into `auto_gpt_workspace/creditfix/knowledge/`.
+
 ### Quick start
 
 ```bash
@@ -28,6 +38,7 @@ python -m autogpt -C agents/credit_repair.yaml
 | `agents/credit_repair/seed/` | Files copied into the workspace on first run |
 | `agents/credit_repair/templates/` | Bureau/furnisher dispute, goodwill, validation letters |
 | `agents/credit_repair/tools/credit_math.py` | Utilization, target paydown, payoff, snowball/avalanche |
+| `agents/credit_repair/knowledge/` | Trained corpus (scores, FCRA, disputes, collections, scams, playbooks) |
 
 Runtime outputs land in `auto_gpt_workspace/creditfix/` (gitignored).
 

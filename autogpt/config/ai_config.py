@@ -21,6 +21,7 @@ class AIConfig:
         ai_language (str): Preferred user-facing language (e.g. "English").
         prompt_preamble (str): Optional override for the default independence preamble.
         operating_rules (list): Ordered methods / SOPs the agent should follow.
+        knowledge_dir (str): Optional path to a preset knowledge corpus.
     """
 
     def __init__(
@@ -32,6 +33,7 @@ class AIConfig:
         ai_language: str = "",
         prompt_preamble: str = "",
         operating_rules: list | None = None,
+        knowledge_dir: str = "",
     ) -> None:
         """
         Initialize a class instance
@@ -60,6 +62,7 @@ class AIConfig:
         self.ai_language = ai_language
         self.prompt_preamble = prompt_preamble
         self.operating_rules = operating_rules
+        self.knowledge_dir = knowledge_dir
 
     # Soon this will go in a folder where it remembers more stuff about the run(s)
     SAVE_FILE = os.path.join(os.path.dirname(__file__), "..", "ai_settings.yaml")
@@ -92,6 +95,7 @@ class AIConfig:
         ai_language = config_params.get("ai_language", "")
         prompt_preamble = config_params.get("prompt_preamble", "")
         operating_rules = config_params.get("operating_rules", [])
+        knowledge_dir = config_params.get("knowledge_dir") or config_params.get("knowledge_dir", "")
         # type: Type[AIConfig]
         return AIConfig(
             ai_name,
@@ -101,6 +105,7 @@ class AIConfig:
             ai_language,
             prompt_preamble,
             operating_rules,
+            knowledge_dir,
         )
 
     def save(self, config_file: str = SAVE_FILE) -> None:
@@ -128,6 +133,8 @@ class AIConfig:
             config["prompt_preamble"] = self.prompt_preamble
         if self.operating_rules:
             config["operating_rules"] = self.operating_rules
+        if self.knowledge_dir:
+            config["knowledge_dir"] = self.knowledge_dir
         with open(config_file, "w", encoding="utf-8") as file:
             yaml.dump(config, file, allow_unicode=True)
 
@@ -167,6 +174,15 @@ class AIConfig:
             full_prompt += "\nPRESET CONSTRAINTS:\n\n"
             for i, constraint in enumerate(self.ai_constraints):
                 full_prompt += f"{i+1}. {constraint}\n"
+
+
+        if self.knowledge_dir:
+            full_prompt += (
+                f"\nKNOWLEDGE CORPUS: Your trained reference library is at `{self.knowledge_dir}` "
+                "(and the workspace copy under auto_gpt_workspace/creditfix/knowledge/). "
+                "Read INDEX.md and 00_quick_reference.md before advising; cite modules you used "
+                "in knowledge_brief.md.\n"
+            )
 
         if self.ai_language:
             full_prompt += (
