@@ -16,3 +16,16 @@ python -m autogpt --ai-settings agents/native_nations_meta_growth.yaml
 ```
 
 Uses official Meta Business Suite / Ads Manager workflows only. Drafts require human approval before publishing.
+
+## Credit File Error Analyst
+
+Analyzes **your own** credit report text or screenshot OCR for possible errors and drafts official FCRA disputes. No bureau logins, no guaranteed deletions, no scrubbing accurate negatives.
+
+- Config: `agents/credit_file_error_analyst.yaml`
+- Playbook: `docs/playbooks/credit-file-error-analyst-playbook.md`
+
+### Run
+
+```bash
+python -m autogpt --ai-settings agents/credit_file_error_analyst.yaml
+```
